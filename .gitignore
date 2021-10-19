@@ -1,0 +1,7 @@
+node_modules
+team_rsa
+team_rsa.pub
+.next
+.DS_Store
+yarn-error.log
+yarn.lock
