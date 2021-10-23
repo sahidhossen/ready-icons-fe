@@ -10,26 +10,34 @@ const btnTypes = {
 };
 
 const Button = (props) => {
-	const { onClick, children, className, type, tag: TagName } = props;
+	const { onClick, children, className, type, tag: TagName, small, ...Others } = props;
 
-	const classes = classNames(className, styles.btn, styles[btnTypes[type]]);
+	const classes = classNames(className, styles.btn, styles[btnTypes[type]], { [styles.btnSmall]: small });
+
+	const onClickHandler = (event) => {
+		if (onClick) {
+			onClick(event);
+		}
+	};
 
 	return (
-		<TagName className={classes} role="button" onClick={onClick}>
+		<TagName {...Others} className={classes} role="button" onClick={onClickHandler}>
 			{children}
 		</TagName>
 	);
 };
 
 Button.defaultProps = {
-	type: 'primary',
+	type: 'default',
 	tag: 'button',
 };
 
 Button.propTypes = {
 	tag: PropTypes.string,
 	type: PropTypes.oneOf(['primary', 'default', 'secondary']),
-	onClick: PropTypes.func.isRequired,
+	onClick: PropTypes.func,
+	href: PropTypes.string,
+	small: PropTypes.bool,
 };
 
 export default Button;

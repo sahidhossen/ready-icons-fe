@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { icons } from '../utils/heroIcons';
 import { Button } from '../components';
+import { useRouter } from 'next/router';
 
 const Home = () => {
-	const state = useSelector((state) => state);
-
-	useEffect(() => {
-		// console.log('state: ', state);
-	}, []);
+	const router = useRouter();
 
 	const onIconPage = (event) => {
 		event.preventDefault();
-		console.log('clicked: ');
+		router.push('/icons');
 	};
 
 	return (
@@ -24,8 +20,8 @@ const Home = () => {
 					</div>
 					<div className="site-subtitle">
 						<div className="slogan">
-							1200+{' '}
-							<Button tag="span" className="icon-btn" onClick={onIconPage}>
+							1200+
+							<Button tag="span" type="primary" className="icon-btn" onClick={onIconPage}>
 								<i className="duotone ready-icon-click"></i>
 								Icons
 							</Button>
