@@ -1,5 +1,5 @@
 // REDUCERS
-import { LOGIN_SUCCSS, LOGIN_ERROR, USER_INFO, FETCHING_USER, FETCHED_USER } from '../types';
+import { LOGIN_SUCCSS, LOGIN_ERROR, USER_INFO, FETCHING_USER, FETCHED_USER } from '../../constants';
 
 const initialState = {
 	isLogin: false,

@@ -1,5 +1,5 @@
 // REDUCERS
-import { FIRE_NOTIFICATION, REMOVE_NOTIFICATION } from '../types';
+import { FIRE_NOTIFICATION, REMOVE_NOTIFICATION } from '../../constants';
 import { revisedRandId } from '../../utils';
 
 const notificationReducer = (state = {}, action) => {

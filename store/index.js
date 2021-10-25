@@ -1,3 +1,5 @@
-import createStore from './createStore';
+import { createWrapper } from 'next-redux-wrapper';
 
-export default createStore();
+import initializeStore from './init';
+
+export const wrapper = createWrapper(initializeStore);

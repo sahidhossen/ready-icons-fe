@@ -1,16 +1,30 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cx from 'classnames';
+import { wrapper } from '../../store';
+import { fetchIconAction } from '../../actions';
 import styles from './Icon.module.scss';
 import { TwitterIcon, SearchIcon } from './svgIcons';
 import { Button } from '../../components';
+import { icons } from '../../utils/heroIcons';
 
-const Icons = () => {
-	const state = useSelector((state) => state);
+export const getStaticProps = wrapper.getStaticProps((store) => async (props) => {
+	await store.dispatch(fetchIconAction());
+});
+
+const Icons = (props) => {
+	const state = useSelector((store) => ({
+		icons: store.icons.icons,
+		categories: store.icons.categories,
+		total: store.icons.total,
+		iconFetched: store.icons.fetched,
+	}));
 
 	useEffect(() => {
-		// console.log('state: ', state);
+		console.log('state: ', state, props);
 	}, []);
+
+	console.log('props: ', props);
 
 	return (
 		<div className="icons-container">
@@ -37,20 +51,17 @@ const Icons = () => {
 				<div className={styles.iconCategoryList}>
 					<a href="#" className={cx(styles.activeIconCategory, styles.categoryName)}>
 						<span className={styles.itemLabel}>All</span>
-						<span className={styles.itemCount}>4000</span>
+						<span className={styles.itemCount}>{state.total}</span>
 					</a>
-					<a href="#" className={styles.categoryName}>
-						<span className={styles.itemLabel}>Arrow</span>
-						<span className={styles.itemCount}>50</span>
-					</a>
-					<a href="#" className={styles.categoryName}>
-						<span className={styles.itemLabel}>Astrology</span>
-						<span className={styles.itemCount}>100</span>
-					</a>
-					<a href="#" className={styles.categoryName}>
-						<span className={styles.itemLabel}>All</span>
-						<span className={styles.itemCount}>4000</span>
-					</a>
+					{Object.keys(state.categories).map((key, index) => {
+						const category = state.categories[key];
+						return (
+							<a href="#" key={index} className={styles.categoryName}>
+								<span className={styles.itemLabel}>{category.name}</span>
+								<span className={styles.itemCount}>{category.items}</span>
+							</a>
+						);
+					})}
 				</div>
 			</section>
 			<section className={styles.iconLibrary}>

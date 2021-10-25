@@ -1,16 +1,11 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import withReduxStore from '../store/withReduxStore';
+import { wrapper } from '../store';
 import '../public/readyicons/readyicon-fonts.min.css';
 import '../styles/_variables.scss';
 import '../styles/main.scss';
 
-const ReadyIcons = ({ Component, pageProps, reduxStore }) => {
-	return (
-		<Provider store={reduxStore}>
-			<Component {...pageProps} />
-		</Provider>
-	);
+const ReadyIcons = ({ Component, pageProps }) => {
+	return <Component {...pageProps} />;
 };
 
-export default withReduxStore(ReadyIcons);
+export default wrapper.withRedux(ReadyIcons);
